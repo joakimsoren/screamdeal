@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joakimsoren/screamdeal/backend/awsutils"
@@ -76,13 +77,16 @@ func setupAddThemeToPds(router *gin.Engine) {
 
 		fmt.Println(reqBody)
 
-		// bucket := "scary-bucket"
+		bucket := "scary-bucket"
 
 		// Download document
-		// Temp
-		// awsutils.DownloadFile("awsesome-o.pdf", bucket)
+		pdfFilePath := awsutils.DownloadFile(fmt.Sprintf("%s.pdf", reqBody.File), bucket)
+		fmt.Println("PDF", pdfFilePath)
 
 		// Download image
+		fileNameParts := strings.Split(reqBody.Theme, "/")
+		fmt.Println(fileNameParts)
+		// imageFilePath := awsutils.DownloadFile()
 
 		// Send into pdf thingy
 
