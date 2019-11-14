@@ -8,10 +8,14 @@
       @dragenter.prevent
       @dragleave.prevent
     >
-      <h2 v-if="file">{{ file.name }}</h2>
-      <h2 v-else>Click here or drop to upload file</h2>
+      <h3 v-if="file">{{ file.name }}</h3>
+      <h3 v-else>Click here or drop to upload file</h3>
     </label>
-    <input id="file-input" @input="handleInput($event.target.files[0])" type="file" />
+    <input
+      id="file-input"
+      @input="handleInput($event.target.files[0])"
+      type="file"
+    />
   </div>
 </template>
 
@@ -30,14 +34,18 @@ export default class FileUpload extends Vue {
 </script>
 <style scoped lang="scss">
 .file-upload {
-  width: 30%;
   height: 10rem;
+  width: 30%;
   margin-left: auto;
   margin-right: auto;
   background: rgba(0, 0, 0, 0.5);
   border: 2px dashed rgb(68, 68, 68);
   display: block;
   color: darkorange;
+  padding: 1rem;
+  h3 {
+    font-weight: 200;
+  }
 }
 input {
   position: absolute;

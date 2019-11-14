@@ -2,7 +2,7 @@
   <div class="home">
     <Banner />
     <ThemeSelector @select="select" :selected="selected" :themes="themes" />
-    <FileUpload />
+    <FileUpload class="file-upload-container" />
   </div>
 </template>
 
@@ -25,17 +25,16 @@ import { actionLoadThemes } from "../store/themes/theme.actions";
 })
 export default class Home extends Vue {
   @State("selected", { namespace: themeNamespace }) selected: string;
-  @State("themes", { namespace: themeNamespace }) themes: [string];
+  @State("themes", { namespace: themeNamespace }) themes: string[];
 
   @Action(actionSetTheme, { namespace: themeNamespace }) actionSetTheme: any;
   @Action(actionLoadThemes, { namespace: themeNamespace })
   actionLoadThemes: any;
 
-  showWitch = false;
-
-  async mounted() {
-    await this.actionLoadThemes();
+  mounted() {
+    this.actionLoadThemes();
   }
+
   select(index: number) {
     this.actionSetTheme(index);
   }
@@ -43,5 +42,13 @@ export default class Home extends Vue {
 </script>
 <style lang="scss" scoped>
 .home {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  .file-upload-container {
+    margin-top: auto;
+    padding-bottom: 1rem;
+  }
 }
 </style>
