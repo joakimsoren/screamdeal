@@ -97,7 +97,7 @@ func setupAddThemeToPds(router *gin.Engine) {
 
 		// Get signed url of new pdf
 
-		temp := awsutils.GetSignedURL("awesome-o.pdf", "scary-bucket")
+		temp := awsutils.GetSignedURL("project-proposal.pdf", "scary-bucket")
 
 		c.JSON(200, gin.H{
 			"pdf": temp,
