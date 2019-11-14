@@ -4,7 +4,7 @@ RUN mkdir /workspace
 WORKDIR /workspace
 
 COPY go.mod .
-COPY go.sum .
+# COPY go.sum .
 
 RUN go mod download
 
