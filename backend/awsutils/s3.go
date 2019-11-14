@@ -78,6 +78,25 @@ func DownloadFile(filename, bucket string) string {
 	return localFilePath
 }
 
+func DownloadImage(filename, bucket string) string {
+	sess := getS3Session("eu-west-1")
+	downloader := s3manager.NewDownloader(sess)
+
+	key := fmt.Sprintf("/images/%s", filename)
+	localFilePath := fmt.Sprintf("./%s", filename)
+
+	file, err := os.Create(localFilePath)
+
+	_, err = downloader.Download(file, &s3.GetObjectInput{
+		Bucket: aws.String(bucket),
+		Key:    aws.String(key),
+	})
+	if err != nil {
+		fmt.Printf("Failed to download file, %v", err)
+	}
+	return localFilePath
+}
+
 // GetSignedURL Gets signed url for themed document
 func GetSignedURL(filename, bucket string) string {
 	sess := getS3Session("eu-west-1")

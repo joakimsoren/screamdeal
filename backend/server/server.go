@@ -85,11 +85,14 @@ func setupAddThemeToPds(router *gin.Engine) {
 
 		// Download image
 		fileNameParts := strings.Split(reqBody.Theme, "/")
-		fmt.Println(fileNameParts)
-		// imageFilePath := awsutils.DownloadFile()
+		fileName := fmt.Sprintf("%s", fileNameParts[len(fileNameParts)-1])
+		fmt.Println(fileName)
+		imageFilePath := awsutils.DownloadImage(fileName, bucket)
+		fmt.Println("IMAGE", imageFilePath)
 
 		// Send into pdf thingy
-
+		waterMarkedFilePath, _ := addWatermarkImage(pdfFilePath, fmt.Sprintf("water-%s", pdfFilePath), imageFilePath)
+		fmt.Println("WaterMarked", waterMarkedFilePath)
 		// Upload modified pdf
 
 		// Get signed url of new pdf
@@ -102,29 +105,30 @@ func setupAddThemeToPds(router *gin.Engine) {
 	})
 }
 
-func addWatermarkImage(inputPath string, outputPath string, watermarkPath string) error {
+func addWatermarkImage(inputPath string, outputPath string, watermarkPath string) (string, error) {
 	c := creator.New()
 
 	watermarkImg, err := c.NewImageFromFile(watermarkPath)
 	if err != nil {
-		return err
+		return "1", err
 	}
 
 	// Read the input pdf file.
 	f, err := os.Open(inputPath)
 	if err != nil {
-		return err
+		return "2", err
 	}
 	defer f.Close()
 
 	pdfReader, err := pdf.NewPdfReader(f)
 	if err != nil {
-		return err
+		fmt.Println(err)
+		return "3", err
 	}
 
 	numPages, err := pdfReader.GetNumPages()
 	if err != nil {
-		return err
+		return "4", err
 	}
 
 	for i := 0; i < numPages; i++ {
@@ -133,7 +137,7 @@ func addWatermarkImage(inputPath string, outputPath string, watermarkPath string
 		// Read the page.
 		page, err := pdfReader.GetPage(pageNum)
 		if err != nil {
-			return err
+			return "5", err
 		}
 
 		// Add to creator.
@@ -152,5 +156,5 @@ func addWatermarkImage(inputPath string, outputPath string, watermarkPath string
 	c.SetForms(pdfReader.AcroForm)
 
 	err = c.WriteToFile(outputPath)
-	return err
+	return outputPath, err
 }
