@@ -9,11 +9,13 @@ export const namespace: string = "themes";
 export interface IThemeState {
   themes: string[];
   selected?: string;
+  uploadedFile?: string;
 }
 
 export const state: IThemeState = {
   themes: [],
-  selected: undefined
+  selected: undefined,
+  uploadedFile: undefined
 };
 
 export const themes: Module<IThemeState, RootState> = {

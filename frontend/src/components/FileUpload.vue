@@ -11,7 +11,11 @@
       <h2 v-if="file">{{ file.name }}</h2>
       <h2 v-else>Click here or drop to upload file</h2>
     </label>
-    <input id="file-input" @input="handleInput($event.target.files[0])" type="file" />
+    <input
+      id="file-input"
+      @input="handleInput($event.target.files[0])"
+      type="file"
+    />
   </div>
 </template>
 
@@ -24,7 +28,7 @@ export default class FileUpload extends Vue {
 
   handleInput(file) {
     this.file = file;
-    console.log(this.file);
+    this.$emit("file", file);
   }
 }
 </script>
