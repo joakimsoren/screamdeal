@@ -1,12 +1,12 @@
 <template>
   <div class="theme-selector">
     <div
-      v-for="(item, index) in 5"
+      v-for="item in themes"
       :key="item"
-      :class="['theme-box', { selected: index === selected }]"
+      :class="['theme-box', { selected: item === selected }]"
     >
       <img class="theme-image" src="/img/doc.jpg" />
-      <button class="theme-button" @click="handleClick(index)">
+      <button class="theme-button" @click="handleClick(item)">
         Select theme
       </button>
     </div>
@@ -18,9 +18,10 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 
 @Component
 export default class ThemeSelector extends Vue {
-  @Prop() selected: number;
+  @Prop() selected: string;
+  @Prop() themes: [string];
 
-  handleClick(index: number) {
+  handleClick(index: string) {
     this.$emit("select", index);
   }
 }
@@ -31,47 +32,38 @@ export default class ThemeSelector extends Vue {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+  height: 35rem;
 
   .theme-box {
     width: 20%;
-    height: auto;
+    height: max-content;
     margin: 2rem;
     position: relative;
     transition: width 1s;
 
-    &.selected {
-      border-top: solid 5px green;
-    }
-
     .theme-image {
       width: 100%;
       height: auto;
+      box-shadow: 0px 5px 10px 0px #2e2e2e;
+      border: 1px solid transparent;
     }
 
+    &.selected > .theme-image {
+      border: 1px solid green;
+      box-shadow: 0px 5px 10px 0px green;
+    }
     .theme-button {
-      background: orange;
-      border: none;
-      padding: 1rem;
-      color: white;
-      font-weight: bold;
-      opacity: 0;
-      transition: opacity 0.3s;
       position: absolute;
       bottom: 2rem;
       left: 50%;
       transform: translate(-50%, -50%);
-      cursor: pointer;
-      &:focus {
-        outline: none;
-      }
-
-      &:hover {
-        background: darkorange;
-      }
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
     &:hover {
       width: 50%;
+      height: max-content;
       .theme-button {
         transition: opacity 0.3s 1s;
         opacity: 1;

@@ -8,7 +8,7 @@ export const mutations: MutationTree<IThemeState> = {
   [mutationSetThemes](state: IThemeState, themes: string[]) {
     state.themes = themes;
   },
-  [mutationSetSelectedTheme](state: IThemeState, themeId: number) {
+  [mutationSetSelectedTheme](state: IThemeState, themeId: string) {
     state.selected = themeId;
   }
 };
