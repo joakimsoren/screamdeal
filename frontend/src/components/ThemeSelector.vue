@@ -1,12 +1,12 @@
 <template>
   <div class="theme-selector">
     <div
-      v-for="(item, index) in 5"
+      v-for="item in themes"
       :key="item"
-      :class="['theme-box', { selected: index === selected }]"
+      :class="['theme-box', { selected: item === selected }]"
     >
       <img class="theme-image" src="/img/doc.jpg" />
-      <button class="theme-button" @click="handleClick(index)">
+      <button class="theme-button" @click="handleClick(item)">
         Select theme
       </button>
     </div>
@@ -18,9 +18,10 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 
 @Component
 export default class ThemeSelector extends Vue {
-  @Prop() selected: number;
+  @Prop() selected: string;
+  @Prop() themes: [string];
 
-  handleClick(index: number) {
+  handleClick(index: string) {
     this.$emit("select", index);
   }
 }

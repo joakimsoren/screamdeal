@@ -8,7 +8,7 @@ export const namespace: string = "themes";
 
 export interface IThemeState {
   themes: string[];
-  selected?: number;
+  selected?: string;
 }
 
 export const state: IThemeState = {
