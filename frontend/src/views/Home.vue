@@ -5,13 +5,17 @@
 </template>
 
 <script>
-import Banner from '@/components/Banner.vue';
-import { Vue, Component } from 'vue-property-decorator';
+import Banner from "@/components/Banner.vue";
+import { Vue, Component } from "vue-property-decorator";
 
 @Component({
   components: {
-    Banner,
-  },
+    Banner
+  }
 })
 export default class Home extends Vue {}
 </script>
+<style lang="scss" scoped>
+.home {
+}
+</style>
