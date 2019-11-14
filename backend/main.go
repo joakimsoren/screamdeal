@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 func main() {
-	fmt.Println("The scariest API in the world runs, MOHAHAHAHAHAAHAH")
+	// TODO: Start server
+	fmt.Println(fmt.Sprintf("The scariest API in the world runs on port %s, MOHAHAHAHAHAAHAH", os.Getenv("PORT")))
 }
