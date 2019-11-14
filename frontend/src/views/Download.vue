@@ -1,11 +1,10 @@
 <template>
-  <div class="home">
-    <Banner />
+  <div class="download">
+    Download
   </div>
 </template>
 
 <script>
-import Banner from '@/components/Banner.vue';
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component({
@@ -13,5 +12,5 @@ import { Vue, Component } from 'vue-property-decorator';
     Banner,
   },
 })
-export default class Home extends Vue {}
+export default class Download extends Vue {}
 </script>
