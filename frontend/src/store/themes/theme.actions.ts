@@ -4,12 +4,14 @@ import { IThemeState } from "@/store/themes/theme.store";
 import {
   mutationSetSelectedTheme,
   mutationSetThemes,
-  mutationSetUploadedFile
+  mutationSetUploadedFile,
+  mutationSetThemedPdf
 } from "./theme.mutations";
 
 export const actionLoadThemes = "loadTheme";
 export const actionSetTheme = "setTheme";
 export const actionUploadFile = "uploadFile";
+export const actionApplyThemeToPdf: string = "applyThemeToPdf";
 
 export const actions: ActionTree<IThemeState, RootState> = {
   async [actionLoadThemes]({ commit }) {
@@ -27,5 +29,23 @@ export const actions: ActionTree<IThemeState, RootState> = {
     });
     const data = await response.json();
     commit(mutationSetUploadedFile, data);
+  },
+  async [actionApplyThemeToPdf](
+    { commit },
+    uploadedFile: string,
+    theme: string
+  ) {
+    const response = await fetch("http://localhost:8080/add-theme-to-pdf", {
+      method: "POST",
+      body: JSON.stringify({
+        file: uploadedFile,
+        theme
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const data = await response.json();
+    commit(mutationSetThemedPdf, data.pdf);
   }
 };

@@ -3,8 +3,8 @@
     <Banner />
     <ThemeSelector @select="select" :selected="selected" :themes="themes" />
     <FileUpload @file="handleFile" /><br />
-    <button v-if="uploadedFile" @click="handelDownload">
-      Download your themed pdf
+    <button @click="handleClick">
+      Add theme to pdf
     </button>
   </div>
 </template>
@@ -19,7 +19,8 @@ import { actionSetTheme } from "@/store/themes/theme.actions";
 import { namespace as themeNamespace } from "@/store/themes/theme.store";
 import {
   actionLoadThemes,
-  actionUploadFile
+  actionUploadFile,
+  actionApplyThemeToPdf
 } from "../store/themes/theme.actions";
 
 @Component({
@@ -39,6 +40,8 @@ export default class Home extends Vue {
   actionLoadThemes: any;
   @Action(actionUploadFile, { namespace: themeNamespace })
   actionUploadFile: any;
+  @Action(actionApplyThemeToPdf, { namespace: themeNamespace })
+  actionApplyThemeToPdf: any;
 
   showWitch = false;
 
@@ -50,8 +53,8 @@ export default class Home extends Vue {
     this.actionUploadFile(file);
   }
 
-  handleDownload(downloadFile) {
-    // Download from url
+  handleClick(file) {
+    this.actionApplyThemeToPdf(this.uploadedFile, this.selected);
   }
 
   select(index: number) {

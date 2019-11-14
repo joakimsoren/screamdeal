@@ -10,12 +10,14 @@ export interface IThemeState {
   themes: string[];
   selected?: string;
   uploadedFile?: string;
+  themedPdf?: string;
 }
 
 export const state: IThemeState = {
   themes: [],
   selected: undefined,
-  uploadedFile: undefined
+  uploadedFile: undefined,
+  themedPdf: undefined
 };
 
 export const themes: Module<IThemeState, RootState> = {
