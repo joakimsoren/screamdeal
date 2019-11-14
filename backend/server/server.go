@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"os"
+	"github.com/joakimsoren/screamdeal/backend/awsutils"
 )
 
 
@@ -20,7 +21,7 @@ func StartServer() {
 func setupThemes(router *gin.Engine) {
 	router.GET("/themes", func(c *gin.Context) {
 		//använd Christoffers funktion för att hämta länkar från AWS S3
-		urls := []string{"url1", "url2"}
+		urls := awsutils.GetThemeURLs()
 
 		c.JSON(200, gin.H{
 			"urls": urls,
