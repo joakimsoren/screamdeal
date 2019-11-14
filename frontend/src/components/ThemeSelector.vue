@@ -40,15 +40,17 @@ export default class ThemeSelector extends Vue {
     position: relative;
     transition: width 1s;
 
-    &.selected {
-      border-top: solid 5px green;
-    }
-
     .theme-image {
       width: 100%;
       height: auto;
+      box-shadow: 0px 5px 10px 0px #2e2e2e;
+      border: 1px solid transparent;
     }
 
+    &.selected > .theme-image {
+      border: 1px solid green;
+      box-shadow: 0px 5px 10px 0px green;
+    }
     .theme-button {
       position: absolute;
       bottom: 2rem;
