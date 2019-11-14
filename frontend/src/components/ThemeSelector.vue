@@ -5,10 +5,13 @@
       :key="item"
       :class="['theme-box', { selected: item === selected }]"
     >
-      <img class="theme-image" src="/img/doc.jpg" />
-      <button class="theme-button" @click="handleClick(item)">
-        Select theme
-      </button>
+      <div class="theme-image-box">
+        <img class="theme-image" src="/img/doc.jpg" />
+        <img class="theme" :src="item" />
+        <button class="theme-button" @click="handleClick(item)">
+          Select theme
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -29,26 +32,31 @@ export default class ThemeSelector extends Vue {
 <style scoped lang="scss">
 .theme-selector {
   display: flex;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  height: 35rem;
+  flex-direction: row;
 
   .theme-box {
     width: 20%;
-    height: max-content;
-    margin: 2rem;
-    position: relative;
+    margin: 0.5rem;
     transition: width 1s;
 
-    .theme-image {
-      width: 100%;
-      height: auto;
-      box-shadow: 0px 5px 10px 0px #2e2e2e;
-      border: 1px solid transparent;
+    .theme-image-box {
+      position: relative;
+      flex-grow: 0;
+      .theme-image {
+        width: 100%;
+        box-shadow: 0px 5px 10px 0px #2e2e2e;
+        border: 1px solid transparent;
+      }
+
+      .theme {
+        position: absolute;
+        max-width: 50%;
+        left: calc(2% + 10px);
+        bottom: calc(2% + 10px);
+      }
     }
 
-    &.selected > .theme-image {
+    &.selected > .theme-image-box > .theme-image {
       border: 1px solid green;
       box-shadow: 0px 5px 10px 0px green;
     }
@@ -62,7 +70,7 @@ export default class ThemeSelector extends Vue {
     }
 
     &:hover {
-      width: 50%;
+      width: 30%;
       height: max-content;
       .theme-button {
         transition: opacity 0.3s 1s;

@@ -10,13 +10,26 @@ import (
 	pdf "github.com/unidoc/unipdf/v3/model"
 
 	// "reflect"
+<<<<<<< HEAD
 	"bytes"
 	"io"
 	"io/ioutil"
+=======
+	// "io"
+	// "io/ioutil"
+	// "bytes"
+	"github.com/gin-contrib/cors"
+	// "unsafe"
+>>>>>>> cec4653a57cb3eeb7e95fef68798a4ffc7381353
 )
 
 func StartServer() {
 	router := gin.Default()
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:8081"}
+	// config.AllowOrigins == []string{"http://google.com", "http://facebook.com"}
+
+	router.Use(cors.New(config))
 	setupThemes(router)
 	setupPutPdf(router)
 	setupAddThemeToPds(router)
@@ -36,12 +49,12 @@ func setupThemes(router *gin.Engine) {
 
 func setupPutPdf(router *gin.Engine) {
 	router.POST("/put-pdf", func(c *gin.Context) {
-		fileHeader, _ := c.FormFile("filepdf")
-		file, _ := fileHeader.Open()                //get the file
-		fileTemp, _ := ioutil.TempFile(".", "temp") //create a temporary file
-		buffer := bytes.NewBuffer(nil)              //create empty buffer
-		io.Copy(buffer, file)                       //write file to buffer
-		fileTemp.Write(buffer.Bytes())              //write buffer to temp file.
+		// fileHeader, _ := c.FormFile("filepdf")
+		// file, _ := fileHeader.Open()                //get the file
+		// fileTemp, _ := ioutil.TempFile(".", "temp") //create a temporary file
+		// buffer := bytes.NewBuffer(nil)              //create empty buffer
+		// io.Copy(buffer, file)                       //write file to buffer
+		// fileTemp.Write(buffer.Bytes())              //write buffer to temp file.
 		// fmt.Println(reflect.TypeOf(buffer.Bytes()))
 		// fmt.Println(fileTemp.)
 		// fmt.Println(reflect.TypeOf(fileTemp))
