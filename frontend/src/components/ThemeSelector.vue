@@ -51,12 +51,12 @@ export default class ThemeSelector extends Vue {
       .theme {
         position: absolute;
         max-width: 50%;
-        left: 2%;
-        bottom: 2%;
+        left: calc(2% + 10px);
+        bottom: calc(2% + 10px);
       }
     }
 
-    &.selected > .theme-image {
+    &.selected > .theme-image-box > .theme-image {
       border: 1px solid green;
       box-shadow: 0px 5px 10px 0px green;
     }
