@@ -95,6 +95,9 @@ func setupAddThemeToPds(router *gin.Engine) {
 		fmt.Println("WaterMarked", waterMarkedFilePath)
 		// Upload modified pdf
 
+		file, _ := os.Open(waterMarkedFilePath)
+		awsutils.UploadFile(file)
+
 		// Get signed url of new pdf
 
 		temp := awsutils.GetSignedURL("project-proposal.pdf", "scary-bucket")
