@@ -5,6 +5,8 @@
     <FileUpload
       class="file-upload-container"
       :themeSelected="!!selected"
+      :loading="loading"
+      :loaded="loaded"
       @file="handleFile"
     />
     <button @click="handleClick">
@@ -38,6 +40,8 @@ export default class Home extends Vue {
   @State("selected", { namespace: themeNamespace }) selected: string;
   @State("themes", { namespace: themeNamespace }) themes: [string];
   @State("uploadedFile", { namespace: themeNamespace }) uploadedFile: string;
+  @State("loadingPdfUpload", { namespace: themeNamespace }) loading: boolean;
+  @State("loadedPdfUpload", { namespace: themeNamespace }) loaded: boolean;
 
   @Action(actionSetTheme, { namespace: themeNamespace }) actionSetTheme: any;
   @Action(actionLoadThemes, { namespace: themeNamespace })
