@@ -85,8 +85,10 @@ func setupAddThemeToPds(router *gin.Engine) {
 
 		// Download image
 		fileNameParts := strings.Split(reqBody.Theme, "/")
-		fmt.Println(fileNameParts)
-		// imageFilePath := awsutils.DownloadFile()
+		fileName := fmt.Sprintf("%s", fileNameParts[len(fileNameParts)-1])
+		fmt.Println(fileName)
+		imageFilePath := awsutils.DownloadImage(fileName, bucket)
+		fmt.Println("IMAGE", imageFilePath)
 
 		// Send into pdf thingy
 
