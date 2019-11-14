@@ -70,7 +70,7 @@ export default class ThemeSelector extends Vue {
     }
 
     &:hover {
-      width: 50%;
+      width: 30%;
       height: max-content;
       .theme-button {
         transition: opacity 0.3s 1s;
