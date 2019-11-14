@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/google/uuid"
 )
@@ -31,8 +32,8 @@ func GetThemeURLs() []string {
 	return themeURLs
 }
 
-// UploadDocument Upload a document and get its id
-func UploadDocument(file *os.File) string {
+// UploadFile Upload a document and get its id
+func UploadFile(file *os.File) string {
 	documentID := uuid.New().String()
 
 	bucket := "scary-bucket"
@@ -54,4 +55,24 @@ func UploadDocument(file *os.File) string {
 	}
 
 	return documentID
+}
+
+// DownloadFile Download a file from s3, returns local file path
+func DownloadFile(filename, bucket string) string {
+	sess := getS3Session("eu-west-1")
+	downloader := s3manager.NewDownloader(sess)
+
+	key := fmt.Sprintf("/original-documents/%s", filename)
+	localFilePath := fmt.Sprintf("./%s", filename)
+
+	file, err := os.Create(localFilePath)
+
+	_, err = downloader.Download(file, &s3.GetObjectInput{
+		Bucket: aws.String(bucket),
+		Key:    aws.String(key),
+	})
+	if err != nil {
+		fmt.Printf("Failed to download file, %v", err)
+	}
+	return localFilePath
 }
