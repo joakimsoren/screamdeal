@@ -18,7 +18,7 @@ export default class App extends Vue {}
   width: 100%;
   padding: 0;
   margin: 0;
-  font-family: Arial;
+  font-family: "Lakki Reddy", cursive;
 
   button {
     background: orange;

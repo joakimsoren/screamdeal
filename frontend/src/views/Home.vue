@@ -2,7 +2,14 @@
   <div class="home">
     <Banner />
     <ThemeSelector @select="select" :selected="selected" :themes="themes" />
+    <<<<<<< HEAD
+    <FileUpload @file="handleFile" /><br />
+    <button @click="handleClick">
+      Add theme to pdf
+    </button>
+    =======
     <FileUpload class="file-upload-container" />
+    >>>>>>> origin/master
   </div>
 </template>
 
@@ -14,7 +21,11 @@ import { Vue, Component } from "vue-property-decorator";
 import { State, Action } from "vuex-class";
 import { actionSetTheme } from "@/store/themes/theme.actions";
 import { namespace as themeNamespace } from "@/store/themes/theme.store";
-import { actionLoadThemes } from "../store/themes/theme.actions";
+import {
+  actionLoadThemes,
+  actionUploadFile,
+  actionApplyThemeToPdf
+} from "../store/themes/theme.actions";
 
 @Component({
   components: {
@@ -25,14 +36,27 @@ import { actionLoadThemes } from "../store/themes/theme.actions";
 })
 export default class Home extends Vue {
   @State("selected", { namespace: themeNamespace }) selected: string;
-  @State("themes", { namespace: themeNamespace }) themes: string[];
+  @State("themes", { namespace: themeNamespace }) themes: [string];
+  @State("uploadedFile", { namespace: themeNamespace }) uploadedFile: string;
 
   @Action(actionSetTheme, { namespace: themeNamespace }) actionSetTheme: any;
   @Action(actionLoadThemes, { namespace: themeNamespace })
   actionLoadThemes: any;
+  @Action(actionUploadFile, { namespace: themeNamespace })
+  actionUploadFile: any;
+  @Action(actionApplyThemeToPdf, { namespace: themeNamespace })
+  actionApplyThemeToPdf: any;
 
   mounted() {
     this.actionLoadThemes();
+  }
+
+  handleFile(file) {
+    this.actionUploadFile(file);
+  }
+
+  handleClick(file) {
+    this.actionApplyThemeToPdf(this.uploadedFile, this.selected);
   }
 
   select(index: number) {
