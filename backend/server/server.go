@@ -122,6 +122,7 @@ func addWatermarkImage(inputPath string, outputPath string, watermarkPath string
 
 	pdfReader, err := pdf.NewPdfReader(f)
 	if err != nil {
+		fmt.Println(err)
 		return "3", err
 	}
 
