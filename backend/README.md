@@ -1,6 +1,9 @@
 **Screamdeal** Golang API Documentation
 
+### Local setup
 
+- Add .env file in root of /backend (ask Christoffer for the values)
+- Run docker-compose up
 
 ### Endpoints
 
@@ -10,7 +13,7 @@
 
 #### POST
 
-**/put-pdf** 
+**/put-pdf**
 
 return link to pdf in S3 (file storage)
 
@@ -21,6 +24,3 @@ takes parameters PDF file (somehow)
 returns link to themed pdf in S3 (file storage)
 
 takes parameters PDF link (from /put-pdf) and link to theme image (in S3)
-
-
-
