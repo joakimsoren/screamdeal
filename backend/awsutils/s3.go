@@ -3,6 +3,7 @@ package awsutils
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -75,4 +76,22 @@ func DownloadFile(filename, bucket string) string {
 		fmt.Printf("Failed to download file, %v", err)
 	}
 	return localFilePath
+}
+
+// GetSignedURL Gets signed url for themed document
+func GetSignedURL(filename, bucket string) string {
+	sess := getS3Session("eu-west-1")
+	svc := s3.New(sess)
+
+	key := fmt.Sprintf("themed-documents/%s", filename)
+
+	req, _ := svc.GetObjectRequest(&s3.GetObjectInput{
+		Bucket: aws.String(bucket),
+		Key:    aws.String(key),
+	})
+	urlStr, err := req.Presign(15 * time.Minute)
+	if err != nil {
+		fmt.Println("Failed to get signed URL")
+	}
+	return urlStr
 }
