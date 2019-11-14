@@ -7,4 +7,5 @@ require (
 	github.com/gin-contrib/cors v1.3.0
 	github.com/gin-gonic/gin v1.4.0
 	github.com/google/uuid v1.1.1
+	github.com/unidoc/unipdf/v3 v3.3.0
 )

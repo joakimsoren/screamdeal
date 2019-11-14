@@ -29,6 +29,9 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 @Component
 export default class FileUpload extends Vue {
   @Prop() themeSelected: boolean;
+  @Prop() loading: boolean;
+  @Prop() loaded: boolean;
+
   file: File = undefined;
 
   handleInput(file: File) {

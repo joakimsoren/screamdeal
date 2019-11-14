@@ -5,7 +5,11 @@ import {
   mutationSetSelectedTheme,
   mutationSetThemes,
   mutationSetUploadedFile,
-  mutationSetThemedPdf
+  mutationSetThemedPdf,
+  mutationSetLoadingPdf,
+  mutationSetLoadedPdf,
+  mutationSetLoadingApplyTheme,
+  mutationSetLoadedApplyTheme
 } from "./theme.mutations";
 import router from "@/router";
 
@@ -24,30 +28,40 @@ export const actions: ActionTree<IThemeState, RootState> = {
     commit(mutationSetSelectedTheme, themeId);
   },
   async [actionUploadFile]({ commit }, file: File) {
-    const response = await fetch("http://localhost:8080/put-pdf", {
-      method: "POST",
-      body: file
-    });
-    const data = await response.json();
-    commit(mutationSetUploadedFile, data);
+    commit(mutationSetLoadingPdf, true);
+    try {
+      const response = await fetch("http://localhost:8080/put-pdf", {
+        method: "POST",
+        body: file
+      });
+      const data = await response.json();
+      commit(mutationSetUploadedFile, data);
+      commit(mutationSetLoadedPdf, true);
+    } catch {}
+    commit(mutationSetLoadingPdf, false);
   },
   async [actionApplyThemeToPdf](
     { commit },
     uploadedFile: string,
     theme: string
   ) {
-    const response = await fetch("http://localhost:8080/add-theme-to-pdf", {
-      method: "POST",
-      body: JSON.stringify({
-        file: uploadedFile,
-        theme
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-    const data = await response.json();
-    commit(mutationSetThemedPdf, data.pdf);
-    router.push("/download");
+    commit(mutationSetLoadingApplyTheme, true);
+    try {
+      const response = await fetch("http://localhost:8080/add-theme-to-pdf", {
+        method: "POST",
+        body: JSON.stringify({
+          file: uploadedFile,
+          theme
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      const data = await response.json();
+      commit(mutationSetThemedPdf, data.pdf);
+      router.push("/download");
+    } catch {}
+    commit(mutationSetLoadingApplyTheme, false);
+    commit(mutationSetLoadedApplyTheme, true);
   }
 };
