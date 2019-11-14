@@ -16,7 +16,7 @@ import (
 	// "bytes"
 	"github.com/gin-contrib/cors"
 	// "unsafe"
-	"net/http"
+	// "net/http"
 )
 
 func StartServer() {
@@ -60,8 +60,10 @@ func setupPutPdf(router *gin.Engine) {
 		if err != nil {
 			// log.Fatal(err)
 		}
-		filepath := "http://localhost:8080/file/" + filename
-		c.JSON(http.StatusOK, gin.H{"filepath": filepath})
+		filetest, err := os.Open("public/" + filename)
+		awsutils.UploadFile(filetest)
+		// filepath := "http://localhost:8080/file/" + filename
+		// c.JSON(http.StatusOK, gin.H{"filepath": filepath})
 
 		// file, _ := fileHeader.Open()                //get the file
 		// fileTemp, _ := ioutil.TempFile(".", "temp") //create a temporary file
@@ -71,10 +73,10 @@ func setupPutPdf(router *gin.Engine) {
 		// fmt.Println(reflect.TypeOf(buffer.Bytes()))
 		// fmt.Println(fileTemp.)
 		// fmt.Println(reflect.TypeOf(fileTemp))
-		// c.Header("Access-Control-Allow-Origin", "*")
-		// c.JSON(200, gin.H{
-		// 	"url": "url to pdf in S3",
-		// })
+		c.Header("Access-Control-Allow-Origin", "*")
+		c.JSON(200, gin.H{
+			"url": "url to pdf in S3",
+		})
 	})
 }
 
