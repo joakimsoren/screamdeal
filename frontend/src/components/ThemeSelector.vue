@@ -31,10 +31,11 @@ export default class ThemeSelector extends Vue {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+  height: 35rem;
 
   .theme-box {
     width: 20%;
-    height: auto;
+    height: max-content;
     margin: 2rem;
     position: relative;
     transition: width 1s;
@@ -51,29 +52,17 @@ export default class ThemeSelector extends Vue {
       box-shadow: 0px 5px 10px 0px green;
     }
     .theme-button {
-      background: orange;
-      border: none;
-      padding: 1rem;
-      color: white;
-      font-weight: bold;
-      opacity: 0;
-      transition: opacity 0.3s;
       position: absolute;
       bottom: 2rem;
       left: 50%;
       transform: translate(-50%, -50%);
-      cursor: pointer;
-      &:focus {
-        outline: none;
-      }
-
-      &:hover {
-        background: darkorange;
-      }
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
     &:hover {
       width: 50%;
+      height: max-content;
       .theme-button {
         transition: opacity 0.3s 1s;
         opacity: 1;
