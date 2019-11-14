@@ -9,7 +9,8 @@
       @dragenter.prevent
       @dragleave.prevent
     >
-      <span v-if="file">
+      <h2 v-if="loaded">File uploaded</h2>
+      <span v-else-if="file">
         <h2>Uploading:</h2>
         <h3>{{ file.name }}</h3>
       </span>
@@ -32,7 +33,7 @@ export default class FileUpload extends Vue {
   @Prop() loading: boolean;
   @Prop() loaded: boolean;
 
-  file: File = undefined;
+  file = null;
 
   handleInput(file: File) {
     this.file = file;

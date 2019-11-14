@@ -23,9 +23,11 @@ export default class App extends Vue {}
   button {
     background: orange;
     border: none;
-    padding: 1rem;
+    font-size: 1.2rem;
+    padding: 0.6rem 0.6rem 0.2rem 0.6rem;
     color: white;
-    font-weight: bold;
+    font-family: "Lakki Reddy", cursive;
+
     cursor: pointer;
     &:focus {
       outline: none;
