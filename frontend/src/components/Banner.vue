@@ -1,6 +1,6 @@
 <template>
   <div class="banner-wrapper">
-    <img src="/img/logotype.png" width="300" />
+    <img src="/img/logotype.png" width="400" />
   </div>
 </template>
 

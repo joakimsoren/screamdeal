@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Banner />
-    <ThemeSelector />
+    <ThemeSelector @select="select" :selected="selected" />
     <FileUpload />
   </div>
 </template>
