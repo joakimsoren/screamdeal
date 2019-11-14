@@ -8,7 +8,10 @@
       @dragenter.prevent
       @dragleave.prevent
     >
-      <h2 v-if="file">{{ file.name }}</h2>
+      <span v-if="file">
+        <h2>Uploading:</h2>
+        <h3>{{ file.name }}</h3>
+      </span>
       <h2 v-else>Click here or drop to upload file</h2>
     </label>
     <input

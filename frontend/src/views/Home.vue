@@ -2,7 +2,10 @@
   <div class="home">
     <Banner />
     <ThemeSelector @select="select" :selected="selected" :themes="themes" />
-    <FileUpload @file="handleFile" />
+    <FileUpload @file="handleFile" /><br />
+    <button v-if="uploadedFile" @click="handelDownload">
+      Download your themed pdf
+    </button>
   </div>
 </template>
 
@@ -29,6 +32,7 @@ import {
 export default class Home extends Vue {
   @State("selected", { namespace: themeNamespace }) selected: string;
   @State("themes", { namespace: themeNamespace }) themes: [string];
+  @State("uploadedFile", { namespace: themeNamespace }) uploadedFile: string;
 
   @Action(actionSetTheme, { namespace: themeNamespace }) actionSetTheme: any;
   @Action(actionLoadThemes, { namespace: themeNamespace })
@@ -44,6 +48,10 @@ export default class Home extends Vue {
 
   handleFile(file) {
     this.actionUploadFile(file);
+  }
+
+  handleDownload(downloadFile) {
+    // Download from url
   }
 
   select(index: number) {
