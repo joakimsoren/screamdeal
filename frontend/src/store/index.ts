@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { state } from "./themes/theme.store";
+import { themes } from "./themes/theme.store";
 
 Vue.use(Vuex);
 
