@@ -1,13 +1,21 @@
 <template>
-  <div>
-    ScreamDeal
+  <div class="banner-wrapper">
+    <h1>
+      ScreamDeal
+    </h1>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class Banner extends Vue {}
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.banner-wrapper {
+  font-family: "Lakki Reddy", cursive;
+  color: white;
+  margin: 0;
+}
+</style>
