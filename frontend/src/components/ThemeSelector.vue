@@ -1,8 +1,8 @@
 <template>
   <div class="theme-selector">
     <div v-for="item in 5" :key="item" class="theme-box">
-      <image class="theme-image" src="/img/doc.jpg" />
-      <button class="theme-button" @click="handleClick">Select theme</button>
+      <img class="theme-image" src="/img/doc.jpg" />
+      <button class="theme-button" @click="handleClick(index)">Select theme</button>
     </div>
   </div>
 </template>
@@ -12,8 +12,8 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class ThemeSelector extends Vue {
-  handelClick(theme) {
-    this.$emit("selectTheme", theme.id);
+  handelClick(index) {
+    this.$emit("selectTheme", index);
   }
 }
 </script>
@@ -23,10 +23,9 @@ export default class ThemeSelector extends Vue {
   width: 100%;
   .theme-box {
     width: 20%;
-    height: 10rem;
+    height: auto;
     margin: 2rem;
     position: relative;
-    background: white;
 
     .theme-image {
       width: 100%;
@@ -47,6 +46,9 @@ export default class ThemeSelector extends Vue {
     }
 
     &:hover {
+      .theme-image {
+        filter: brightness(50%);
+      }
       .theme-button {
         opacity: 1;
       }
