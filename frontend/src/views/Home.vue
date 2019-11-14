@@ -2,7 +2,7 @@
   <div class="home">
     <Banner />
     <ThemeSelector @select="select" :selected="selected" :themes="themes" />
-    <FileUpload class="file-upload-container" />
+    <FileUpload class="file-upload-container" :themeSelected="!!selected" />
   </div>
 </template>
 

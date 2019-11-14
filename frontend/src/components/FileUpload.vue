@@ -1,6 +1,10 @@
 <template>
   <div @drop.prevent class="file-upload-container">
+    <div class="no-theme-selected" v-if="!themeSelected">
+      <h3>Please select a theme to upload a file</h3>
+    </div>
     <label
+      v-else
       for="file-input"
       class="file-upload"
       @drop.prevent="handleInput($event.dataTransfer.files[0])"
@@ -20,19 +24,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 
 @Component
 export default class FileUpload extends Vue {
-  file: File = null;
+  @Prop() themeSelected: boolean;
+  file: File = undefined;
 
-  handleInput(file) {
+  handleInput(file: File) {
     this.file = file;
     console.log(this.file);
   }
 }
 </script>
 <style scoped lang="scss">
+.no-theme-selected,
 .file-upload {
   height: 10rem;
   width: 30%;
@@ -46,6 +52,9 @@ export default class FileUpload extends Vue {
   h3 {
     font-weight: 200;
   }
+}
+.no-theme-selected {
+  border-style: solid;
 }
 input {
   position: absolute;
