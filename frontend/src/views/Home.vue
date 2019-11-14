@@ -9,7 +9,7 @@
       :loaded="loaded"
       @file="handleFile"
     />
-    <button @click="handleClick">
+    <button v-if="loaded" @click="handleClick">
       Add theme to pdf
     </button>
   </div>
