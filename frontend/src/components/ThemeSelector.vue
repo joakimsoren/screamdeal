@@ -1,7 +1,7 @@
 <template>
   <div class="theme-selector">
     <div v-for="item in 5" :key="item" class="theme-box">
-      <image class="theme-image" src="./doc.jpg" />
+      <image class="theme-image" src="/img/doc.jpg" />
       <button class="theme-button" @click="handleClick">Select theme</button>
     </div>
   </div>
