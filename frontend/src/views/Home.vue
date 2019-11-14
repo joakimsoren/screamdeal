@@ -2,12 +2,14 @@
   <div class="home">
     <Banner />
     <ThemeSelector @select="select" :selected="selected" />
+    <FileUpload />
   </div>
 </template>
 
 <script lang="ts">
 import Banner from "@/components/Banner.vue";
 import ThemeSelector from "@/components/ThemeSelector.vue";
+import FileUpload from "@/components/FileUpload.vue";
 import { Vue, Component } from "vue-property-decorator";
 import { State, Action } from "vuex-class";
 import { actionSetTheme } from "@/store/themes/theme.actions";
@@ -16,7 +18,8 @@ import { namespace as themeNamespace } from "@/store/themes/theme.store";
 @Component({
   components: {
     Banner,
-    ThemeSelector
+    ThemeSelector,
+    FileUpload
   }
 })
 export default class Home extends Vue {

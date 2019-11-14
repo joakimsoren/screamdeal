@@ -18,5 +18,22 @@ export default class App extends Vue {}
   width: 100%;
   padding: 0;
   margin: 0;
+  font-family: Arial;
+
+  button {
+    background: orange;
+    border: none;
+    padding: 1rem;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background: darkorange;
+    }
+  }
 }
 </style>
