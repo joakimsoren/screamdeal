@@ -91,7 +91,8 @@ func setupAddThemeToPds(router *gin.Engine) {
 		fmt.Println("IMAGE", imageFilePath)
 
 		// Send into pdf thingy
-
+		waterMarkedFilePath, _ := addWatermarkImage(pdfFilePath, fmt.Sprintf("water-%s", pdfFilePath), imageFilePath)
+		fmt.Println("WaterMarked", waterMarkedFilePath)
 		// Upload modified pdf
 
 		// Get signed url of new pdf
@@ -104,29 +105,29 @@ func setupAddThemeToPds(router *gin.Engine) {
 	})
 }
 
-func addWatermarkImage(inputPath string, outputPath string, watermarkPath string) error {
+func addWatermarkImage(inputPath string, outputPath string, watermarkPath string) (string, error) {
 	c := creator.New()
 
 	watermarkImg, err := c.NewImageFromFile(watermarkPath)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	// Read the input pdf file.
 	f, err := os.Open(inputPath)
 	if err != nil {
-		return err
+		return "", err
 	}
 	defer f.Close()
 
 	pdfReader, err := pdf.NewPdfReader(f)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	numPages, err := pdfReader.GetNumPages()
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	for i := 0; i < numPages; i++ {
@@ -135,7 +136,7 @@ func addWatermarkImage(inputPath string, outputPath string, watermarkPath string
 		// Read the page.
 		page, err := pdfReader.GetPage(pageNum)
 		if err != nil {
-			return err
+			return "", err
 		}
 
 		// Add to creator.
@@ -154,5 +155,5 @@ func addWatermarkImage(inputPath string, outputPath string, watermarkPath string
 	c.SetForms(pdfReader.AcroForm)
 
 	err = c.WriteToFile(outputPath)
-	return err
+	return outputPath, err
 }
