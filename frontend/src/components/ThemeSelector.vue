@@ -45,7 +45,7 @@ export default class ThemeSelector extends Vue {
       opacity: 0;
       transition: opacity 0.3s;
       position: absolute;
-      top: 50%;
+      bottom: 2rem;
       left: 50%;
       transform: translate(-50%, -50%);
       cursor: pointer;
