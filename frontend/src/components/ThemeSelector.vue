@@ -20,9 +20,10 @@ export default class ThemeSelector extends Vue {}
   width: 100%;
   .theme-box {
     width: 20%;
-
+    height: 10rem;
     margin: 2rem;
     position: relative;
+    background: white;
 
     .theme-image {
       width: 100%;
