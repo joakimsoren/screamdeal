@@ -2,14 +2,10 @@
   <div class="home">
     <Banner />
     <ThemeSelector @select="select" :selected="selected" :themes="themes" />
-    <<<<<<< HEAD
-    <FileUpload @file="handleFile" /><br />
+    <FileUpload class="file-upload-container" :themeSelected="!!selected" @file="handleFile" />
     <button @click="handleClick">
       Add theme to pdf
     </button>
-    =======
-    <FileUpload class="file-upload-container" />
-    >>>>>>> origin/master
   </div>
 </template>
 
