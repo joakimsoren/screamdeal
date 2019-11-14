@@ -110,24 +110,24 @@ func addWatermarkImage(inputPath string, outputPath string, watermarkPath string
 
 	watermarkImg, err := c.NewImageFromFile(watermarkPath)
 	if err != nil {
-		return "", err
+		return "1", err
 	}
 
 	// Read the input pdf file.
 	f, err := os.Open(inputPath)
 	if err != nil {
-		return "", err
+		return "2", err
 	}
 	defer f.Close()
 
 	pdfReader, err := pdf.NewPdfReader(f)
 	if err != nil {
-		return "", err
+		return "3", err
 	}
 
 	numPages, err := pdfReader.GetNumPages()
 	if err != nil {
-		return "", err
+		return "4", err
 	}
 
 	for i := 0; i < numPages; i++ {
@@ -136,7 +136,7 @@ func addWatermarkImage(inputPath string, outputPath string, watermarkPath string
 		// Read the page.
 		page, err := pdfReader.GetPage(pageNum)
 		if err != nil {
-			return "", err
+			return "5", err
 		}
 
 		// Add to creator.
