@@ -11,11 +11,12 @@ import (
 	pdf "github.com/unidoc/unipdf/v3/model"
 
 	// "reflect"
-	// "io"
+	"io"
 	// "io/ioutil"
 	// "bytes"
 	"github.com/gin-contrib/cors"
 	// "unsafe"
+	"net/http"
 )
 
 func StartServer() {
@@ -44,7 +45,24 @@ func setupThemes(router *gin.Engine) {
 
 func setupPutPdf(router *gin.Engine) {
 	router.POST("/put-pdf", func(c *gin.Context) {
-		// fileHeader, _ := c.FormFile("filepdf")
+		file, header, err := c.Request.FormFile("filepdf")
+		if err != nil {
+			// c.String(http.StatusBadRequest, fmt.Sprintf("file err : %s", err.Error()))
+			return
+		}
+		filename := header.Filename
+		out, err := os.Create("public/" + filename)
+		if err != nil {
+			// log.Fatal(err)
+		}
+		defer out.Close()
+		_, err = io.Copy(out, file)
+		if err != nil {
+			// log.Fatal(err)
+		}
+		filepath := "http://localhost:8080/file/" + filename
+		c.JSON(http.StatusOK, gin.H{"filepath": filepath})
+
 		// file, _ := fileHeader.Open()                //get the file
 		// fileTemp, _ := ioutil.TempFile(".", "temp") //create a temporary file
 		// buffer := bytes.NewBuffer(nil)              //create empty buffer
@@ -53,10 +71,10 @@ func setupPutPdf(router *gin.Engine) {
 		// fmt.Println(reflect.TypeOf(buffer.Bytes()))
 		// fmt.Println(fileTemp.)
 		// fmt.Println(reflect.TypeOf(fileTemp))
-		c.Header("Access-Control-Allow-Origin", "*")
-		c.JSON(200, gin.H{
-			"url": "url to pdf in S3",
-		})
+		// c.Header("Access-Control-Allow-Origin", "*")
+		// c.JSON(200, gin.H{
+		// 	"url": "url to pdf in S3",
+		// })
 	})
 }
 
