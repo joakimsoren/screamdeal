@@ -1,9 +1,14 @@
 package awsutils
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3/s3manager"
+	"github.com/google/uuid"
 )
 
 func getS3Session(region string) *session.Session {
@@ -24,4 +29,29 @@ func GetThemeURLs() []string {
 		"https://scary-bucket.s3-eu-west-1.amazonaws.com/images/zombie_PNG56.png",
 	}
 	return themeURLs
+}
+
+// UploadDocument Upload a document and get its id
+func UploadDocument(file *os.File) string {
+	documentID := uuid.New().String()
+
+	bucket := "scary-bucket"
+
+	key := fmt.Sprintf("/original-documents/%s.pdf", documentID)
+
+	sess := getS3Session("eu-west-1")
+	uploader := s3manager.NewUploader(sess)
+
+	upParams := &s3manager.UploadInput{
+		Bucket: &bucket,
+		Key:    &key,
+		Body:   file,
+	}
+
+	_, uploadErr := uploader.Upload(upParams)
+	if uploadErr != nil {
+		return "Error uploading file"
+	}
+
+	return documentID
 }
