@@ -20,12 +20,16 @@ export default class ThemeSelector extends Vue {
 <style scoped lang="scss">
 .theme-selector {
   display: flex;
-  width: 100%;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+
   .theme-box {
     width: 20%;
     height: auto;
     margin: 2rem;
     position: relative;
+    transition: width 1s;
 
     .theme-image {
       width: 100%;
@@ -39,17 +43,25 @@ export default class ThemeSelector extends Vue {
       color: white;
       font-weight: bold;
       opacity: 0;
+      transition: opacity 0.3s;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      cursor: pointer;
+      &:focus {
+        outline: none;
+      }
+
+      &:hover {
+        background: darkorange;
+      }
     }
 
     &:hover {
-      .theme-image {
-        filter: brightness(50%);
-      }
+      width: 50%;
       .theme-button {
+        transition: opacity 0.3s 1s;
         opacity: 1;
       }
     }
