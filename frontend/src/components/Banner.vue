@@ -1,8 +1,6 @@
 <template>
   <div class="banner-wrapper">
-    <h1>
-      ScreamDeal
-    </h1>
+    <img src="/img/logotype.png" width="300" />
   </div>
 </template>
 
