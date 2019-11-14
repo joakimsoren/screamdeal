@@ -3,7 +3,7 @@
 ### Local setup
 
 - Add .env file in root of /backend (ask Christoffer for the values)
-- Run docker-compose up
+- Run docker-compose up --build
 
 ### Endpoints
 

@@ -8,15 +8,17 @@ export const namespace: string = "themes";
 
 export interface IThemeState {
   themes: string[];
+  selected?: number;
 }
 
 export const state: IThemeState = {
   themes: [],
+  selected: undefined
 };
 
 export const themes: Module<IThemeState, RootState> = {
   state,
   actions,
   mutations,
-  namespaced,
+  namespaced
 };
