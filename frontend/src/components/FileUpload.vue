@@ -1,10 +1,7 @@
 <template>
   <div @drop.prevent class="file-upload-container">
-    <div class="no-theme-selected" v-if="!themeSelected">
-      <h3>Please select a theme to upload a file</h3>
-    </div>
     <label
-      v-else
+      v-if="themeSelected"
       for="file-input"
       class="file-upload"
       @drop.prevent="handleInput($event.dataTransfer.files[0])"

@@ -46,7 +46,6 @@ export const actions: ActionTree<IThemeState, RootState> = {
         "Content-Type": "application/json"
       }
     });
-    console.log(response);
     const data = await response.json();
     commit(mutationSetThemedPdf, data.pdf);
     router.push("/download");
