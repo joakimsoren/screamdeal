@@ -2,13 +2,13 @@ package server
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"os"
+
+	"github.com/gin-gonic/gin"
 	"github.com/joakimsoren/screamdeal/backend/awsutils"
 	// "reflect"
 	// "io/ioutil"
 )
-
 
 func StartServer() {
 	router := gin.Default()
@@ -18,7 +18,6 @@ func StartServer() {
 	fmt.Println("Listen in port ", os.Getenv("PORT"))
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
-
 
 func setupThemes(router *gin.Engine) {
 	router.GET("/themes", func(c *gin.Context) {
@@ -47,8 +46,11 @@ func setupPutPdf(router *gin.Engine) {
 func setupAddThemeToPds(router *gin.Engine) {
 	router.POST("/add-theme-to-pdf", func(c *gin.Context) {
 		c.Header("Access-Control-Allow-Origin", "*")
+
+		temp := awsutils.GetSignedURL("awesome-o.pdf", "scary-bucket")
+
 		c.JSON(200, gin.H{
-			"pdf": "pdf link to themed file",
+			"pdf": temp,
 		})
 	})
 }
