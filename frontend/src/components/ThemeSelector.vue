@@ -40,7 +40,7 @@ export default class ThemeSelector extends Vue {
     transition: width 1s;
 
     &.selected {
-      border: solid 5px red;
+      border-top: solid 5px green;
     }
 
     .theme-image {
