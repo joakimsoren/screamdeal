@@ -12,8 +12,11 @@
       @dragenter.prevent
       @dragleave.prevent
     >
-      <h3 v-if="file">{{ file.name }}</h3>
-      <h3 v-else>Click here or drop to upload file</h3>
+      <span v-if="file">
+        <h2>Uploading:</h2>
+        <h3>{{ file.name }}</h3>
+      </span>
+      <h2 v-else>Click here or drop to upload file</h2>
     </label>
     <input
       id="file-input"
@@ -33,7 +36,7 @@ export default class FileUpload extends Vue {
 
   handleInput(file: File) {
     this.file = file;
-    console.log(this.file);
+    this.$emit("file", file);
   }
 }
 </script>
