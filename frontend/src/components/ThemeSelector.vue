@@ -52,7 +52,7 @@ export default class ThemeSelector extends Vue {
         position: absolute;
         max-width: 50%;
         left: calc(2% + 10px);
-        bottom: calc(2% + 10px);
+        top: calc(20% + 10px);
       }
     }
 

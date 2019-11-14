@@ -20,13 +20,15 @@ export default class App extends Vue {}
   margin: 0;
   font-family: "Lakki Reddy", cursive;
 
-  button {
+  button,
+  .button {
     background: orange;
     border: none;
     font-size: 1.2rem;
     padding: 0.6rem 0.6rem 0.2rem 0.6rem;
     color: white;
     font-family: "Lakki Reddy", cursive;
+    text-decoration: none;
 
     cursor: pointer;
     &:focus {
