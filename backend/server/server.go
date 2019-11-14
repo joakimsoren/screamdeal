@@ -10,17 +10,11 @@ import (
 	pdf "github.com/unidoc/unipdf/v3/model"
 
 	// "reflect"
-<<<<<<< HEAD
-	"bytes"
-	"io"
-	"io/ioutil"
-=======
 	// "io"
 	// "io/ioutil"
 	// "bytes"
 	"github.com/gin-contrib/cors"
 	// "unsafe"
->>>>>>> cec4653a57cb3eeb7e95fef68798a4ffc7381353
 )
 
 func StartServer() {
