@@ -1,9 +1,8 @@
 <template>
   <div class="theme-selector">
-    <image src="./assets/doc.jpg" />
     <div v-for="item in 5" :key="item" class="theme-box">
       <image class="theme-image" src="./doc.jpg" />
-      <button class="theme-button">Select theme</button>
+      <button class="theme-button" @click="handleClick">Select theme</button>
     </div>
   </div>
 </template>
@@ -12,7 +11,11 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class ThemeSelector extends Vue {}
+export default class ThemeSelector extends Vue {
+  handelClick(theme) {
+    this.$emit("selectTheme", theme.id);
+  }
+}
 </script>
 <style scoped lang="scss">
 .theme-selector {
