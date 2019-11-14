@@ -37,14 +37,18 @@ export default class FileUpload extends Vue {
 </script>
 <style scoped lang="scss">
 .file-upload {
-  width: 30%;
   height: 10rem;
+  width: 30%;
   margin-left: auto;
   margin-right: auto;
   background: rgba(0, 0, 0, 0.5);
   border: 2px dashed rgb(68, 68, 68);
   display: block;
   color: darkorange;
+  padding: 1rem;
+  h3 {
+    font-weight: 200;
+  }
 }
 input {
   position: absolute;

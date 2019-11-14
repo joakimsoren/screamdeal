@@ -2,10 +2,14 @@
   <div class="home">
     <Banner />
     <ThemeSelector @select="select" :selected="selected" :themes="themes" />
+    <<<<<<< HEAD
     <FileUpload @file="handleFile" /><br />
     <button @click="handleClick">
       Add theme to pdf
     </button>
+    =======
+    <FileUpload class="file-upload-container" />
+    >>>>>>> origin/master
   </div>
 </template>
 
@@ -43,8 +47,6 @@ export default class Home extends Vue {
   @Action(actionApplyThemeToPdf, { namespace: themeNamespace })
   actionApplyThemeToPdf: any;
 
-  showWitch = false;
-
   mounted() {
     this.actionLoadThemes();
   }
@@ -64,5 +66,13 @@ export default class Home extends Vue {
 </script>
 <style lang="scss" scoped>
 .home {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  .file-upload-container {
+    margin-top: auto;
+    padding-bottom: 1rem;
+  }
 }
 </style>
